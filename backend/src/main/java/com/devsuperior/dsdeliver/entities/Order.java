@@ -21,7 +21,6 @@ public class Order  implements Serializable {
     private Double longitude;
     private Instant moment;
     private OrderStatus status;
-    private Double total;
     // Neste caso será usado Set para não aceitar repetições e o jpa já
     // cria atomatico uma tabela de muitos pra muitos no banco
     @ManyToMany
@@ -33,14 +32,13 @@ public class Order  implements Serializable {
 
     public Order(){}
 
-    public Order(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status, Double total) {
+    public Order(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
         this.id = id;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.moment = moment;
         this.status = status;
-        this.total = total;
     }
 
     public Long getId() {
@@ -89,14 +87,6 @@ public class Order  implements Serializable {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
     }
 
     public Set<Product> getProducts() {
