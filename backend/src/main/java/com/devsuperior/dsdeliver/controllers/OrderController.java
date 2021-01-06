@@ -31,11 +31,20 @@ public class OrderController {
         return ResponseEntity.ok().body(list);
     }
 
+    //Método que insere um pedido
     @PostMapping
     public ResponseEntity<OrderDTO> insert(@RequestBody OrderDTO dto){
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    //Método que altera o status de um pedido
+    // A anotação @PathVariable é usada para que o método reconhece o atributo que está sendo passado pelo " @PutMapping()"
+    @PutMapping("/{id}/delivered")
+    public ResponseEntity<OrderDTO> setDelivered(@PathVariable Long id){
+        OrderDTO dto = service.setDelivere(id);
+        return ResponseEntity.ok().body(dto);
     }
 }

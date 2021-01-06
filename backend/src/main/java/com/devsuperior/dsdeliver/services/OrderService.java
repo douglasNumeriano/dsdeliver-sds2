@@ -50,4 +50,13 @@ public class OrderService {
 
         return new OrderDTO(order);
     }
+
+    //Alterar status de um pedido
+    @Transactional
+    public OrderDTO setDelivere(Long id){
+        Order order = repository.getOne(id);
+        order.setStatus(OrderStatus.DELIVERED);
+        order = repository.save(order);
+        return new OrderDTO(order);
+    }
 }
